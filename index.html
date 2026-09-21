@@ -7,12 +7,27 @@
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
+  html {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    overscroll-behavior: none;
+    background: #2b1a4e;
+  }
+
   body {
     font-family: 'Georgia', 'Times New Roman', serif;
     background: linear-gradient(180deg, #2b1a4e 0%, #6b2d5c 30%, #c84b31 60%, #f2a154 80%, #ffd970 100%);
     min-height: 100vh;
     min-height: 100dvh;
+    width: 100%;
     overflow: hidden;
+    overscroll-behavior: none;
+    touch-action: none;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+    -webkit-tap-highlight-color: transparent;
     cursor: pointer;
     position: relative;
   }
@@ -150,7 +165,7 @@
   /* ---------- SOBRE / CARTA ---------- */
   .envelope-wrap {
     position: fixed;
-    bottom: 30px;
+    bottom: max(30px, env(safe-area-inset-bottom));
     left: 50%;
     transform: translateX(-50%);
     z-index: 30;
