@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🌻 Para ti, mi amor 💛</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    background: linear-gradient(180deg, #2b1a4e 0%, #6b2d5c 30%, #c84b31 60%, #f2a154 80%, #ffd970 100%);
+    min-height: 100vh;
+    overflow: hidden;
+    cursor: pointer;
+    position: relative;
+  }
+
+  /* ---------- ESTRELLAS ---------- */
+  .star {
+    position: fixed;
+    background: #fff;
+    border-radius: 50%;
+    animation: twinkle ease-in-out infinite;
+    z-index: 1;
+  }
+  @keyframes twinkle {
+    0%, 100% { opacity: 0.2; transform: scale(0.8); }
+    50% { opacity: 1; transform: scale(1.2); }
+  }
+
+  /* ---------- SOL PONIÉNDOSE ---------- */
+  .sun {
+    position: fixed;
+    bottom: 18vh;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 140px;
+    height: 140px;
+    background: radial-gradient(circle, #fff3b0 10%, #ffd970 45%, #ff9d3f 100%);
+    border-radius: 50%;
+    box-shadow: 0 0 80px 40px rgba(255, 190, 90, 0.45);
+    animation: breatheSun 6s ease-in-out infinite;
+    z-index: 2;
+  }
+  @keyframes breatheSun {
+    0%, 100% { box-shadow: 0 0 80px 40px rgba(255, 190, 90, 0.45); }
+    50% { box-shadow: 0 0 110px 55px rgba(255, 190, 90, 0.65); }
+  }
+
+  /* ---------- TÍTULO ---------- */
+  header {
+    position: relative;
+    text-align: center;
+    padding-top: 7vh;
+    z-index: 10;
+    pointer-events: none;
+  }
+  h1 {
+    font-size: clamp(1.7rem, 4.5vw, 3.2rem);
+    color: #fff3d6;
+    font-style: italic;
+    text-shadow: 0 0 25px rgba(255, 215, 130, 0.8), 2px 2px 8px rgba(0,0,0,0.35);
+    animation: glowTitle 4s ease-in-out infinite;
+  }
+  @keyframes glowTitle {
+    0%, 100% { text-shadow: 0 0 25px rgba(255,215,130,0.8), 2px 2px 8px rgba(0,0,0,0.35); }
+    50% { text-shadow: 0 0 45px rgba(255,230,160,1), 2px 2px 8px rgba(0,0,0,0.35); }
+  }
+  .subtitle {
+    margin-top: 14px;
+    font-size: clamp(0.95rem, 2.2vw, 1.25rem);
+    color: #ffe8c2;
+    font-style: italic;
+    opacity: 0.9;
+  }
+  .hint {
+    margin-top: 20px;
+    display: inline-block;
+    background: rgba(255, 243, 214, 0.15);
+    border: 1px solid rgba(255, 232, 194, 0.5);
+    backdrop-filter: blur(4px);
+    padding: 10px 26px;
+    border-radius: 30px;
+    font-size: clamp(0.85rem, 1.9vw, 1rem);
+    color: #ffe8c2;
+    animation: pulseHint 2.5s ease-in-out infinite;
+  }
+  @keyframes pulseHint {
+    0%, 100% { transform: scale(1); opacity: 0.85; }
+    50% { transform: scale(1.04); opacity: 1; }
+  }
+
+  /* ---------- FLORES ---------- */
+  .flower {
+    position: absolute;
+    transform-origin: bottom center;
+    animation: growFlower 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    z-index: 8;
+    pointer-events: none;
+  }
+  @keyframes growFlower {
+    0% { transform: scale(0) translateY(25px); opacity: 0; }
+    100% { transform: scale(1) translateY(0); opacity: 1; }
+  }
+  .flower-inner {
+    animation: sway 4s ease-in-out infinite;
+    transform-origin: bottom center;
+  }
+  @keyframes sway {
+    0%, 100% { transform: rotate(-3deg); }
+    50% { transform: rotate(3deg); }
+  }
+
+  /* ---------- CORAZONES Y PÉTALOS FLOTANDO ---------- */
+  .floaty {
+    position: fixed;
+    bottom: -40px;
+    z-index: 6;
+    pointer-events: none;
+    animation: floatUp linear forwards;
+  }
+  @keyframes floatUp {
+    0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+    10% { opacity: 0.9; }
+    90% { opacity: 0.8; }
+    100% { transform: translateY(-110vh) rotate(40deg); opacity: 0; }
+  }
+
+  /* ---------- FRASES ROMÁNTICAS FLOTANTES ---------- */
+  .love-note {
+    position: absolute;
+    color: #fff3d6;
+    font-style: italic;
+    font-size: clamp(0.85rem, 2vw, 1.1rem);
+    text-shadow: 0 0 12px rgba(255,200,120,0.9), 1px 1px 4px rgba(0,0,0,0.4);
+    pointer-events: none;
+    z-index: 12;
+    animation: noteRise 3.5s ease-out forwards;
+    white-space: nowrap;
+  }
+  @keyframes noteRise {
+    0% { transform: translateY(0) scale(0.7); opacity: 0; }
+    15% { opacity: 1; transform: translateY(-15px) scale(1); }
+    80% { opacity: 1; }
+    100% { transform: translateY(-90px) scale(1.05); opacity: 0; }
+  }
+
+  /* ---------- SOBRE / CARTA ---------- */
+  .envelope-wrap {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 30;
+    text-align: center;
+  }
+  .envelope {
+    font-size: 52px;
+    display: inline-block;
+    animation: heartbeat 1.8s ease-in-out infinite;
+    filter: drop-shadow(0 0 15px rgba(255, 220, 140, 0.8));
+    transition: transform 0.3s;
+  }
+  .envelope:hover { transform: scale(1.2); }
+  @keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    12% { transform: scale(1.12); }
+    24% { transform: scale(1); }
+    36% { transform: scale(1.12); }
+    48% { transform: scale(1); }
+  }
+  .envelope-label {
+    display: block;
+    margin-top: 6px;
+    color: #ffe8c2;
+    font-size: 0.85rem;
+    font-style: italic;
+  }
+
+  /* ---------- CARTA ABIERTA ---------- */
+  .letter-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(35, 18, 50, 0.85);
+    backdrop-filter: blur(5px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    animation: fadeIn 0.6s ease;
+    padding: 20px;
+  }
+  .letter-overlay.show { display: flex; }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+  .letter {
+    background: linear-gradient(160deg, #fff9e8 0%, #ffedc4 100%);
+    max-width: 520px;
+    width: 100%;
+    padding: 45px 40px;
+    border-radius: 6px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5), inset 0 0 40px rgba(230, 180, 90, 0.15);
+    text-align: center;
+    position: relative;
+    animation: unfold 0.9s cubic-bezier(0.34, 1.56, 0.64, 1);
+    max-height: 85vh;
+    overflow-y: auto;
+  }
+  @keyframes unfold {
+    0% { transform: scale(0.3) rotate(-5deg); opacity: 0; }
+    100% { transform: scale(1) rotate(0deg); opacity: 1; }
+  }
+  .letter::before {
+    position: absolute;
+    top: -22px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 44px;
+    animation: sway 4s ease-in-out infinite;
+  }
+  .letter h2 {
+    color: #b5651d;
+    font-style: italic;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+  }
+  .letter p {
+    color: #5d4037;
+    font-size: 1.05rem;
+    line-height: 1.9;
+    font-style: italic;
+  }
+  .letter .typed::after {
+    content: '❘';
+    animation: blink 0.9s step-end infinite;
+    color: #b5651d;
+  }
+  .letter .typed.done::after { content: ''; }
+  @keyframes blink { 50% { opacity: 0; } }
+  .letter .signature {
+    margin-top: 24px;
+    color: #8d5524;
+    font-size: 1.1rem;
+    opacity: 0;
+    transition: opacity 1.5s ease;
+  }
+  .letter .signature.show { opacity: 1; }
+  .letter button {
+    margin-top: 28px;
+    background: linear-gradient(135deg, #e8963e, #c96f2e);
+    border: none;
+    padding: 12px 34px;
+    border-radius: 30px;
+    font-size: 1rem;
+    font-family: inherit;
+    font-style: italic;
+    color: #fff8ec;
+    cursor: pointer;
+    box-shadow: 0 5px 18px rgba(200, 120, 50, 0.5);
+    transition: transform 0.2s;
+  }
+  .letter button:hover { transform: scale(1.08); }
+</style>
+</head>
+<body>
+
+  <div class="sun"></div>
+
+  <header>
+    <h1>Para ti, mi amor 🌻</h1>
+    <p class="subtitle">21 de septiembre — te regalo un campo infinito de flores amarillas</p>
+    <span class="hint">💛 Toca la pantalla y mira cómo florece lo que siento por ti 💛</span>
+  </header>
+
+  <div class="envelope-wrap" id="envelopeWrap">
+    <span class="envelope" id="envelope">💌</span>
+    <span class="envelope-label">tengo algo que decirte…</span>
+  </div>
+
+  <div class="letter-overlay" id="letterOverlay">
+    <div class="letter">
+      <h2>Mi amor…</h2>
+      <p><span class="typed" id="typedText"></span></p>
+      <p class="signature" id="signature">Con todo mi corazón, tuyo por siempre. 💛🌻</p>
+      <button onclick="closeLetter(event)">Volver a nuestro jardín 🌼</button>
+    </div>
+  </div>
+
+<script>
+  // ✏️ PERSONALIZA AQUÍ ------------------------------------------
+  const NOMBRE = 'mi amor';
+  const CARTA = `Dicen que quien te regala flores amarillas quiere verte feliz por el resto de su vida... y yo no encontré un ramo lo suficientemente grande para demostrarte cuánta felicidad te deseo. Así que te hice este jardín: cada flor que ves crecer aquí es una de las razones por las que te amo, y fíjate que nunca se terminan. Feliz día de las flores amarillas, ${NOMBRE}. Eres mi sol de cada mañana. ☀️`;
+  const FRASES = [
+    'Eres mi flor favorita 🌻',
+    'Contigo todos los días brillan ☀️',
+    'Te amo, ' + NOMBRE + ' 💛',
+    'Mi sol de cada mañana ✨',
+    'Cada latido lleva tu nombre 💛',
+    'Eres mi lugar favorito 🌼',
+    'Amarillo es vernos juntos 💛',
+    'Floreciste en mi vida 🌻',
+  ];
+  // --------------------------------------------------------------
+
+  const FLOWER_EMOJIS = ['🌻', '🌼'];
+  const FLOATY_EMOJIS = ['💛', '🌻', '💛', '🌼', '✨'];
+
+  const letterOverlay = document.getElementById('letterOverlay');
+  const typedText = document.getElementById('typedText');
+  const signature = document.getElementById('signature');
+  let letterOpened = false;
+  let typingTimer = null;
+  let phraseIndex = 0;
+
+  // ---------- Estrellas del cielo ----------
+  for (let i = 0; i < 40; i++) {
+    const star = document.createElement('div');
+    star.className = 'star';
+    const size = 1 + Math.random() * 2.5;
+    star.style.cssText = `
+      width:${size}px; height:${size}px;
+      left:${Math.random() * 100}vw; top:${Math.random() * 45}vh;
+      animation-duration:${2 + Math.random() * 3}s;
+      animation-delay:${Math.random() * 3}s;
+    `;
+    document.body.appendChild(star);
+  }
+
+  // ---------- Plantar flor + frase romántica ----------
+  function plantFlower(x, y, withNote = true) {
+    const flower = document.createElement('div');
+    flower.className = 'flower';
+    const size = 38 + Math.random() * 42;
+    flower.style.left = (x - size / 2) + 'px';
+    flower.style.top = (y - size) + 'px';
+
+    const inner = document.createElement('div');
+    inner.className = 'flower-inner';
+    inner.style.animationDelay = (Math.random() * 2) + 's';
+    const emoji = FLOWER_EMOJIS[Math.floor(Math.random() * FLOWER_EMOJIS.length)];
+    inner.innerHTML = `
+      <div style="font-size:${size}px; line-height:1; text-align:center; filter: drop-shadow(0 0 8px rgba(255,210,100,0.7));">${emoji}</div>
+      <div style="width:4px; height:${size * 0.7}px; background:linear-gradient(#7a9b4e,#4e6b32); margin:0 auto; border-radius:2px;"></div>
+    `;
+    flower.appendChild(inner);
+    document.body.appendChild(flower);
+
+    if (withNote) {
+      const note = document.createElement('div');
+      note.className = 'love-note';
+      note.textContent = FRASES[phraseIndex % FRASES.length];
+      phraseIndex++;
+      note.style.left = Math.max(10, Math.min(x - 60, window.innerWidth - 180)) + 'px';
+      note.style.top = (y - size - 30) + 'px';
+      document.body.appendChild(note);
+      setTimeout(() => note.remove(), 3600);
+    }
+
+    burstHearts(x, y);
+  }
+
+  // ---------- Corazoncitos al plantar ----------
+  function burstHearts(x, y) {
+    for (let i = 0; i < 5; i++) {
+      const heart = document.createElement('span');
+      heart.textContent = '💛';
+      heart.style.cssText = `
+        position:absolute; left:${x}px; top:${y}px; font-size:13px;
+        pointer-events:none; z-index:15;
+        transition: all 0.9s ease-out; opacity:1;
+      `;
+      document.body.appendChild(heart);
+      requestAnimationFrame(() => {
+        const angle = (Math.PI * 2 * i) / 5 - Math.PI / 2;
+        heart.style.transform = `translate(${Math.cos(angle) * 55}px, ${Math.sin(angle) * 55 - 20}px) scale(1.4)`;
+        heart.style.opacity = '0';
+      });
+      setTimeout(() => heart.remove(), 950);
+    }
+  }
+
+  // ---------- Corazones y flores subiendo ----------
+  function releaseFloaty() {
+    const floaty = document.createElement('span');
+    floaty.className = 'floaty';
+    floaty.textContent = FLOATY_EMOJIS[Math.floor(Math.random() * FLOATY_EMOJIS.length)];
+    floaty.style.left = Math.random() * 100 + 'vw';
+    floaty.style.fontSize = (13 + Math.random() * 16) + 'px';
+    floaty.style.animationDuration = (8 + Math.random() * 8) + 's';
+    document.body.appendChild(floaty);
+    setTimeout(() => floaty.remove(), 17000);
+  }
+  setInterval(releaseFloaty, 1100);
+
+  // ---------- Carta con efecto máquina de escribir ----------
+  function openLetter(event) {
+    event.stopPropagation();
+    letterOverlay.classList.add('show');
+    if (letterOpened) return;
+    letterOpened = true;
+
+    let charIndex = 0;
+    typedText.textContent = '';
+    signature.classList.remove('show');
+    typingTimer = setInterval(() => {
+      typedText.textContent = CARTA.slice(0, charIndex);
+      charIndex++;
+      if (charIndex > CARTA.length) {
+        clearInterval(typingTimer);
+        typedText.classList.add('done');
+        signature.classList.add('show');
+      }
+    }, 45);
+  }
+
+  function closeLetter(event) {
+    event.stopPropagation();
+    letterOverlay.classList.remove('show');
+  }
+
+  document.getElementById('envelope').addEventListener('click', openLetter);
+  document.getElementById('envelopeWrap').addEventListener('click', openLetter);
+
+  document.body.addEventListener('click', (event) => {
+    if (letterOverlay.classList.contains('show')) return;
+    if (event.target.closest('.envelope-wrap')) return;
+    plantFlower(event.clientX, event.clientY);
+  });
+
+  // ---------- Jardín inicial de bienvenida ----------
+  window.addEventListener('load', () => {
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+    [0.08, 0.22, 0.38, 0.55, 0.7, 0.85, 0.95].forEach((positionRatio, index) => {
+      setTimeout(() => {
+        plantFlower(width * positionRatio, height * (0.78 + Math.random() * 0.12), false);
+      }, 400 + index * 300);
+    });
+  });
+</script>
+</body>
+</html>
