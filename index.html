@@ -11,6 +11,7 @@
     font-family: 'Georgia', 'Times New Roman', serif;
     background: linear-gradient(180deg, #2b1a4e 0%, #6b2d5c 30%, #c84b31 60%, #f2a154 80%, #ffd970 100%);
     min-height: 100vh;
+    min-height: 100dvh;
     overflow: hidden;
     cursor: pointer;
     position: relative;
@@ -261,6 +262,89 @@
     transition: transform 0.2s;
   }
   .letter button:hover { transform: scale(1.08); }
+
+  /* ---------- AJUSTES PARA PANTALLAS PEQUEÑAS ---------- */
+  @media (max-width: 600px) {
+    header {
+      padding: 5vh 16px 0;
+    }
+
+    h1 {
+      line-height: 1.15;
+    }
+
+    .subtitle {
+      line-height: 1.45;
+    }
+
+    .hint {
+      max-width: 100%;
+      padding: 9px 16px;
+      line-height: 1.35;
+    }
+
+    .sun {
+      width: 110px;
+      height: 110px;
+      bottom: 20vh;
+    }
+
+    .love-note {
+      width: min(78vw, 260px);
+      white-space: normal;
+      text-align: center;
+    }
+
+    .envelope-wrap {
+      bottom: max(18px, env(safe-area-inset-bottom));
+      width: calc(100% - 32px);
+    }
+
+    .letter-overlay {
+      padding: max(16px, env(safe-area-inset-top)) 12px max(16px, env(safe-area-inset-bottom));
+    }
+
+    .letter {
+      padding: 34px 20px 24px;
+      max-height: 90dvh;
+    }
+
+    .letter p {
+      font-size: 1rem;
+      line-height: 1.7;
+    }
+
+    .letter button {
+      max-width: 100%;
+      padding: 11px 20px;
+      line-height: 1.35;
+    }
+  }
+
+  @media (max-height: 520px) and (orientation: landscape) {
+    header {
+      padding-top: 4vh;
+    }
+
+    .hint {
+      margin-top: 10px;
+    }
+
+    .sun {
+      width: 90px;
+      height: 90px;
+      bottom: 12vh;
+    }
+
+    .envelope-wrap {
+      bottom: 10px;
+    }
+
+    .letter {
+      max-height: 94dvh;
+      padding-top: 24px;
+    }
+  }
 </style>
 </head>
 <body>
